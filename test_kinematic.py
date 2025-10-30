@@ -5,8 +5,8 @@ import kinematic.forward_kinematics as FK
 if __name__ == "__main__":
     # Tọa độ điểm cần đạt tới
     Px = 150
-    Py = -50
-    Pz = 70
+    Py = -70
+    Pz = 180
     target_xyz = (Px, Py, Pz)
     theta_cur = [0, 0, 0]  # Giả sử robot đang ở vị trí ban đầu
     # Tính nghịch đảo động học

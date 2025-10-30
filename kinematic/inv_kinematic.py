@@ -84,8 +84,16 @@ def inv_kinematic(target_xyz,theta_cur):
                 try:
                     w1_1 = phi + np.arccos(Px / R)
                     w1_2 = phi - np.arccos(Px / R)
-                    solutions.append([w1_1, w2_now, w3_now]) # thêm một cụm nghiệm vào danh sách
-                    solutions.append([w1_2, w2_now, w3_now])
+                    # === Kiểm chứng Py để chọn dấu đúng ===
+                    # Tính Py dự đoán lại từ từng w1 ứng viên
+                    Py_calc_1 = A * np.sin(w1_1) - B * np.cos(w1_1)
+                    Py_calc_2 = A * np.sin(w1_2) - B * np.cos(w1_2)
+
+                    # Chọn nghiệm nào cho Py_calc gần với Py thật
+                    if abs(Py - Py_calc_1) < abs(Py - Py_calc_2):
+                        solutions.append([w1_1, w2_now, w3_now])
+                    else:
+                        solutions.append([w1_2, w2_now, w3_now])
                 except ValueError:
                     # Khi Px/R vượt ngoài [-1,1]
                     continue
